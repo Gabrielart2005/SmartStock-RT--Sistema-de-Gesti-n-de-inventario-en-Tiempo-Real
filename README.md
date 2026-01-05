@@ -1,23 +1,89 @@
-# SmartStock RT - Sistema de Gestión de Inventario en Tiempo Real 
+# SmartStock RT - Sistema de Gestion de Inventario en Tiempo Real
 
-SmartStock RT es una aplicación de consola desarrollada en Java diseñada para gestionar inventarios de productos en tiempo real. El sistema permite registrar productos, realizar ventas y cuenta con un un monitor que vigila las existencias en tiempo real.
+Sistema de gestion de inventario desarrollado en Java que permite registrar productos, procesar ventas y 
+monitorear existencias en tiempo real mediante hilos concurrentes.
 
-Este proyecto inntegra tecnologias como Java, POO, hilos y colecciones para ofrecer una solución robusta y eficiente para la gestión de inventarios.
+## Descripcion
 
-## Características Principales
+SmartStock RT es una aplicacion de consola que implementa un sistema completo de gestion de inventario. 
+Utiliza el patron Singleton para garantizar una unica instancia del inventario y emplea programacion 
+concurrente para monitorear niveles de stock en segundo plano.
 
-- **Registro de Productos**: Permite agregar nuevos productos al inventario con detalles como nombre, cantidad y precio.
-- **Venta/Salida de Productos**: Procesamiento de datos con validación para asegurar que las ventas no excedan el inventario disponible.
-- **Monitor de Existencias en Tiempo Real**: Un hilo separado que vigila continuamente los niveles de inventario y alerta cuando un producto está por debajo del umbral definido.
-- **Reporte de Inventario**: Genera informes detallados del estado actual del inventario.
-- **Interfaz de Consola**: Interacción sencilla a través de la línea de comandos.
+## Estructura del Proyecto
 
-## Temas aplicados
+```
+SmartStock-RT/
+├── src/
+│   ├── Main.java              # Punto de entrada de la aplicacion
+│   ├── Menu.java              # Interfaz de usuario y opciones del menu
+│   ├── Validador.java         # Validacion de entrada de datos
+│   ├── ReporteConsola.java    # Generacion de reportes en consola
+│   ├── Producto.java          # Modelo de datos para productos
+│   ├── Inventario.java        # Logica de negocio (Singleton)
+│   └── MonitorInventario.java # Monitor de stock en tiempo real (Thread)
+├── bin/                       # Archivos compilados
+└── README.md
+```
 
-1. Programación Orientada a Objetos (POO): Uso de clases y objetos para modelar productos, encapsulamiento de atributos y acceso mediante métodos getters y setters, herencia y polimorfismo para extender funcionalidades, modularidad para mantener el código organizado.
+## Arquitectura
 
-2. Programacion Estructurada: Uso de estructuras de control como condicionales (if, switch) y bucles (for, while) para gestionar el flujo del programa, funciones/métodos para organizar el código en bloques reutilizables.
+El sistema esta dividido en tres capas:
 
-3. Ingeniería de Software: Aplicación de principios de diseño de software, uso de patrones de diseño como el patrón Singleton para la gestión del inventario, pruebas unitarias para asegurar la calidad del código, arquitectura modular para facilitar el mantenimiento y la escalabilidad.
+### Capa de Presentacion (Frontend)
+- `Main.java` - Inicializa el sistema y coordina componentes
+- `Menu.java` - Muestra opciones y procesa selecciones del usuario
+- `Validador.java` - Valida datos ingresados por el usuario
+- `ReporteConsola.java` - Formatea y muestra reportes del inventario
 
-4. Sistemas en Tiempo Real: El software implementa un monitor en tiempo real que vigila las existencias del inventario, utilizando hilos para permitir la ejecución concurrente de tareas, asegurando que las alertas de bajo inventario se generen de manera oportuna.
+### Capa de Logica de Negocio (Backend)
+- `Inventario.java` - Gestiona operaciones CRUD sobre productos (patron Singleton)
+- `MonitorInventario.java` - Vigila niveles de stock en un hilo separado
+
+### Capa de Datos
+- `Producto.java` - Representa la entidad producto con atributos id, nombre, cantidad y precio
+
+## Funcionalidades
+
+- Registro de productos con validacion de datos
+- Venta de productos con control de stock disponible
+- Busqueda de productos por identificador
+- Generacion de reportes de inventario
+- Alertas automaticas de bajo stock en tiempo real
+- Deteccion de productos por debajo del umbral definido
+
+## Tecnologias y Conceptos Aplicados
+
+### Programacion Orientada a Objetos
+- Encapsulamiento mediante modificadores de acceso
+- Getters y setters para control de atributos
+- Patron Singleton para instancia unica del inventario
+
+### Programacion Concurrente
+- Implementacion de interfaz Runnable
+- Uso de Thread para monitoreo en segundo plano
+- Control de ejecucion mediante variable booleana
+
+### Estructuras de Datos
+- ArrayList para almacenamiento dinamico de productos
+- List como interfaz para flexibilidad de implementacion
+
+### Patrones de Diseno
+- Singleton: garantiza una unica instancia del inventario
+- Separation of Concerns: division clara entre capas
+
+## Requisitos
+
+- Java JDK 8 o superior
+- Terminal o consola de comandos
+
+## Ejecucion
+
+```bash
+cd src
+javac *.java
+java Main
+```
+
+## Autores
+
+Proyecto desarrollado como ejercicio academico de programacion en Java.
